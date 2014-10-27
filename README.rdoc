@@ -1,10 +1,13 @@
 = Redmine Google Docs Plugin
 
-This is a plugin for Redmine that allows you to embed Google Spreadsheets and Docs into redmine pages. This is useful for keeping Google Docs-based documentation up-to-date with the issue queue. 
+This is a plugin for Redmine that allows you to embed Google Spreadsheets and
+Docs into redmine pages. This is useful for keeping Google Docs-based
+documentation up-to-date with the issue queue.
 
 http://evolvingweb.ca/sites/default/files/styles/large/public/googledoc_macro_steps.png
 
-For more information, see our blog post on this module: http://evolvingweb.ca/story/introducing-redmine-google-docs-plugin
+For more information, see our blog post on this module:
+http://evolvingweb.ca/story/introducing-redmine-google-docs-plugin
 
 == Installation
 

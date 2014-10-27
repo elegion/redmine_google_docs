@@ -49,8 +49,8 @@ class SpreadsheetMacros
 
     # get a random string to add to the element IDs so multiple spreadsheets don't conflict.
     dom_id = Digest::MD5.hexdigest(rand().to_s)
-    
-    out = <<"EOF"
+
+    <<"EOF"
 <div>
   <style type="text/css">
   /* this is used to override the th and td className */
@@ -62,8 +62,8 @@ class SpreadsheetMacros
       margin-right: 50px;
     }
   </style>
-  <script type="text/javascript" src="https://www.google.com/jsapi"></script> 
-  <script type="text/javascript"> 
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript">
   (function () {
     var prot, options, tableId, fakeSql, key, baseUrl;
 
@@ -76,7 +76,7 @@ class SpreadsheetMacros
         headerCell: 'small-font'
       }
     };
-  	// We want this to be unique for each embedded sheet. Otherwise only one sheet can display per page.
+    // We want this to be unique for each embedded sheet. Otherwise only one sheet can display per page.
     tableId = 'table-' + "#{dom_id}";
     fakeSql = '#{query}';
     key = '#{key}';
@@ -85,7 +85,7 @@ class SpreadsheetMacros
     baseUrl = 'docs.google.com/spreadsheet';
 
     google.load('visualization', '1.s');
-    
+
     function drawVisualization() {
       google.visualization.drawChart({
         "containerId": tableId,
@@ -129,7 +129,6 @@ EOF
   def self.get_issue(obj, args)
     # usage: {{googleissue(adfSDFiuhDSF98SDFhiushdafbhIDFXF0dsf)}}
     # gives the row of the google spreadsheet containing the issue number in the second column
-    goodargs = []
     key = clean_key(args[0])
     if args.length > 1
       sheet = clean_key(args[1])
@@ -154,7 +153,7 @@ EOF
 
       clean_query = clean_key(query)
 
-      out = render_spreadsheet(key, clean_query, sheet, "true")
+      render_spreadsheet(key, clean_query, sheet, "true")
     else
       raise "You need to be on an issue page to use the <strong>googleissue</strong> macro."
     end
@@ -196,7 +195,7 @@ class DocumentMacros
       else
         url += "pub?id=#{doc_key}"
       end
-      out = "<iframe src='#{url}' width='800' height='400'></iframe>"
+      %(<iframe src="#{url}" width="800" height="400"></iframe>)
     else
       raise "The Google document key must be alphanumeric."
     end
