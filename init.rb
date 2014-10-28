@@ -42,5 +42,10 @@ Redmine::Plugin.register :redmine_googlesss do
     macro :googledoc do |obj, args|
       GoogleAppsMacros::DocumentMacros.get_doc(obj, args).html_safe
     end
+
+    desc 'Embed file from Google Drive (read-only view)'
+    macro :googlefile do |_, args|
+      GoogleAppsMacros::DocumentMacros.embed_file(args).html_safe
+    end
   end
 end

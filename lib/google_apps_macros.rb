@@ -165,6 +165,10 @@ EOF
 end
 
 class DocumentMacros
+  def self.base_url
+    "https://drive.google.com"
+  end
+
   def self.get_doc(obj, args)
     doc_key = args[0]
     action = false
@@ -185,11 +189,7 @@ class DocumentMacros
       action = "view" if args[2].strip == "view"
     end
     if /^[\w-]+$/.match(doc_key)
-      if domain
-        url = "https://docs.google.com/a/#{domain}/document/"
-      else
-        url = "https://docs.google.com/document/"
-      end
+      url = "#{base_url}#{domain_part(domain)}/document/"
       if action
         url += "d/#{doc_key}/#{action}"
       else
@@ -200,5 +200,23 @@ class DocumentMacros
       raise "The Google document key must be alphanumeric."
     end
   end
+
+  def self.embed_file(args)
+    key = args[0]
+    domain = args.length == 2 ? args[1].strip : nil
+    height = args.length == 3 ? args[2].to_i : 600
+    url = "#{base_url}#{domain_part(domain)}/file/d/#{key}/view"
+    style = "width: 100%; height: #{height}px;"
+    %(<iframe src="#{url}" style="#{style}"></iframe>)
+  end
+
+  def self.domain_part(domain)
+    if domain.nil? || domain == "nil"
+      "/"
+    else
+      "/a/#{domain}"
+    end
+  end
 end
+
 end
